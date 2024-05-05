@@ -1,0 +1,9 @@
+gene1 chr1 0 80 + "0-20,40-60"
+gene2 chr1 0 80 + "0-20,40-60"
+gene3 chr1 0 80 + "0-20,40-60"
+gene4 chr1 0 80 + "0-20,40-60"
+gene5 chr1 0 100 + "20-40,60-80"
+gene6 chr1 0 100 + "20-40,60-80"
+gene7 chr1 0 100 + "20-40,60-80"
+#GENE TREE
+(((gene1,gene2),(gene3,gene4)),(gene5,gene6,gene7));
