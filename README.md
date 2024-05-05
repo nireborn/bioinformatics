@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:eb848d760aaf0380cb1b8ed605c8b33daefb155b8686b04fb8e3f5a499f8dae6
-size 389
+# README
+
+## 1.如何运行：
+
+### 需要环境：
+
+- python：＞＝v3.10
+
+### 运行方法：
+
+在python编译器中运行 `"main\GUI.py"` 。（由于打包成exe文件需要300MB，未开通会员，故无法上传。）
+
+## 2.测试数据：
+
+测试数据均存放在`"data"`文件夹中。
+
+数据格式需要按照测试数据格式存放，具体说明在软件分页中说明。
