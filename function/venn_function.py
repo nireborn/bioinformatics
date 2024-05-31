@@ -3,63 +3,68 @@
 # NAME:KWD
 # MAIL:nireborn@163.com
 # GOOD LUCK!
+import time
 
+import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
+
 from pyvenn import venn
 
+# 设置matplotlib后端
+matplotlib.use('Agg')  # 使用 Agg 后端（matplotlib默认后端）来生成静态图像文件
 
+
+# Venn图函数 【利用pyvenn绘制】
 def venn_plot(venn_read, venn_write):
     data = pd.read_csv(venn_read, sep='\t')
 
     # 将每一列的基因名字转换为集合
     sets = [set(data[col].dropna()) for col in data.columns]
-    # print(sets)
 
     # 获取集合数量
     num_sets = len(sets)
 
     # 获取第一行数据
     first_row = pd.read_csv(venn_read, header=None).iloc[0].tolist()[0].split('\t')
-    # ['Set1', 'Set2', 'Set3']
 
     labels = venn.get_labels(sets, fill=['number'])
 
-    # fig, ax = venn.venn3(labels, names=first_row, fontsize=8, dpi=72)  # 控制组名及中间数字大小
-    # fig.show()
+    # 设置图片大小
+    plt.figure(figsize=(15, 9), dpi=300)  # 宽度15英寸，高度9英寸，每英寸像素数300
 
     # 根据集合数量选择绘制 Venn 图的函数
     if num_sets == 2:
-        fig, ax = venn.venn2(labels, names=first_row, fontsize=24, dpi=72)
+        fig, ax = venn.venn2(labels, names=first_row, fontsize=20, dpi=300)
     elif num_sets == 3:
-        fig, ax = venn.venn3(labels, names=first_row, fontsize=24, dpi=72)
+        fig, ax = venn.venn3(labels, names=first_row, fontsize=18, dpi=300)
     elif num_sets == 4:
-        fig, ax = venn.venn4(labels, names=first_row, fontsize=24, dpi=72)
+        fig, ax = venn.venn4(labels, names=first_row, fontsize=16, dpi=300)
     elif num_sets == 5:
-        fig, ax = venn.venn5(labels, names=first_row, fontsize=24, dpi=72)
+        fig, ax = venn.venn5(labels, names=first_row, fontsize=14, dpi=300)
     elif num_sets == 6:
-        fig, ax = venn.venn6(labels, names=first_row, fontsize=24, dpi=72)
+        fig, ax = venn.venn6(labels, names=first_row, fontsize=12, dpi=300)
     else:
-        # print(f"Sorry, the number of sets ({num_sets}) is not supported for automatic Venn diagram plotting.")
         return
-    fig.show()
-    # 创建 Venn 图
-    # venn_function(sets, set_labels=data.columns)
-
-    # 获取当前时间的字符串表示（包含秒）
-    # current_time_str = datetime.now().strftime("%Y_%m_%d_%H%M%S")
-    #
-    # URL = venn_write + "\\" + current_time_str + ".png"
 
     fig.savefig(venn_write, bbox_inches='tight')
-
-    # 显示图形
-    # plt.show()
-
+    plt.clf()
 
 if __name__ == '__main__':
-    # 读取数据
-    read = "..\\data\\venn6.txt"
-    write = ".\\venn.png"
-    # 绘制 Venn 图
+    from datetime import datetime
+
+    # read = "../data/9_venn3.txt"
+    read = "../data/9_venn6.txt"
+
+    current_time_str = datetime.now().strftime("%Y_%m_%d_%H%M%S")  # 获取当前时间的字符串表示（包含秒）（年_月_日_时分秒）
+
+    write = "../result/" + current_time_str + ".png"
+
     venn_plot(read, write)
+
+    read = "../data/9_venn3.txt"
+    print("1")
+    time.sleep(5)
+    print("2")
+    venn_plot(read, write)
+
